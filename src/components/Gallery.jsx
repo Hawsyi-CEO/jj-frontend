@@ -56,48 +56,49 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-br from-orange-50 via-amber-50 to-stone-100 relative overflow-hidden">
-      {/* Elegant background effects */}
+    <section id="gallery" className="py-20 bg-stone-900 relative overflow-hidden">
+      {/* Premium background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-32 left-16 w-96 h-96 bg-gradient-to-r from-orange-200/25 to-amber-200/25 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-32 right-16 w-80 h-80 bg-gradient-to-r from-amber-200/20 to-stone-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-gradient-to-r from-orange-100/15 to-amber-100/15 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(251,191,36,0.2),transparent_50%)]"></div>
+        <div className="absolute top-20 left-[5%] w-[500px] h-[500px] bg-amber-600/15 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-[5%] w-96 h-96 bg-orange-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      {/* Soft overlay */}
-      <div className="absolute inset-0 bg-white/30 backdrop-blur-sm"></div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Elegant section header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 backdrop-blur-sm border border-stone-200 mb-8 shadow-lg">
-            <Heart className="w-4 h-4 text-amber-600 mr-2" />
-            <span className="text-stone-700 text-sm font-light tracking-wide">Momen Berkesan</span>
+        {/* Premium section header */}
+        <div className="text-center mb-16">
+          {/* Premium badge */}
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-amber-400/30 mb-10 shadow-xl">
+            <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+            <Heart className="w-4 h-4 text-amber-400" fill="currentColor" />
+            <span className="text-amber-100 text-sm font-bold tracking-wider">Portfolio Kami</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-light text-stone-800 mb-8 tracking-tight">
-            <span className="text-stone-800">
-              Momen
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 bg-clip-text text-transparent">
-              Bersejarah
+          {/* Premium title */}
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white mb-8 tracking-tight leading-tight">
+            <span className="block mb-3">Galeri Momen</span>
+            <span className="block bg-gradient-to-r from-amber-300 via-orange-300 to-amber-300 bg-clip-text text-transparent font-bold animate-gradient bg-[length:200%_auto]">
+              Berkesan
             </span>
           </h2>
           
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8"></div>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-amber-400"></div>
+            <Sparkles className="w-5 h-5 text-amber-400" />
+            <div className="w-20 h-[2px] bg-gradient-to-l from-transparent via-amber-400 to-amber-400"></div>
+          </div>
           
-          <p className="text-xl text-stone-600 font-light leading-relaxed max-w-3xl mx-auto">
-            Setiap acara memiliki cerita yang unik. Lihat bagaimana kami menciptakan momen tak terlupakan dengan sentuhan profesional
+          <p className="text-lg md:text-xl text-amber-100 leading-relaxed max-w-3xl mx-auto">
+            Setiap acara memiliki <span className="font-bold text-amber-300">cerita yang unik</span>. Lihat bagaimana kami menciptakan momen tak terlupakan dengan sentuhan profesional
           </p>
         </div>
 
-        {/* Premium Photo Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-16">
+        {/* Premium Photo Grid with masonry layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 mb-16">
           {photos.map((photo, index) => (
             <div
               key={index}
-              className="group relative aspect-square overflow-hidden rounded-xl md:rounded-2xl cursor-pointer border border-stone-200 shadow-lg hover:shadow-xl"
+              className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer border-2 border-amber-500/30 shadow-2xl hover:shadow-amber-500/50 hover:border-amber-400/70"
               onClick={() => openModal(photo, index)}
             >
               {/* Image */}

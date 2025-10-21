@@ -147,44 +147,45 @@ const ServicesSection = () => {
   }
 
   return (
-    <section id="services" className="py-24 bg-gradient-to-br from-stone-100 via-amber-50 to-orange-50 relative overflow-hidden">
-      {/* Elegant background effects */}
+    <section id="services" className="py-20 bg-stone-900 relative overflow-hidden">
+      {/* Premium background effects - sama dengan Gallery */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-amber-200/30 to-orange-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-r from-stone-200/20 to-amber-200/25 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-100/15 to-amber-100/15 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(251,191,36,0.2),transparent_50%)]"></div>
+        <div className="absolute top-20 left-[5%] w-[500px] h-[500px] bg-amber-600/15 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-[5%] w-96 h-96 bg-orange-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
-
-      {/* Soft overlay */}
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Elegant section header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 backdrop-blur-sm border border-stone-200 mb-8 shadow-lg">
-            <Sparkles className="w-4 h-4 text-amber-600 mr-2" />
-            <span className="text-stone-700 text-sm font-light tracking-wide">Layanan Eksklusif</span>
+        {/* Premium section header */}
+        <div className="text-center mb-16">
+          {/* Premium badge */}
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-amber-400/30 mb-10 shadow-xl hover:shadow-amber-400/50 transition-all duration-500">
+            <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span className="text-amber-100 text-sm font-bold tracking-wider">Layanan Premium</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-light text-stone-800 mb-8 tracking-tight">
-            <span className="text-stone-800">
-              Layanan
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 bg-clip-text text-transparent">
-              Profesional
+          {/* Premium title */}
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif mb-8 tracking-tight leading-tight">
+            <span className="block mb-3 text-white">Paket Layanan</span>
+            <span className="block bg-gradient-to-r from-amber-300 via-orange-300 to-amber-300 bg-clip-text text-transparent font-bold animate-gradient bg-[length:200%_auto]">
+              Eksklusif Kami
             </span>
           </h2>
           
-          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8"></div>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="w-20 h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-amber-400"></div>
+            <Sparkles className="w-5 h-5 text-amber-400" />
+            <div className="w-20 h-[2px] bg-gradient-to-l from-transparent via-amber-400 to-amber-400"></div>
+          </div>
           
-          <p className="text-xl text-stone-600 font-light leading-relaxed max-w-3xl mx-auto">
-            Wujudkan acara impian Anda dengan layanan profesional yang dirancang khusus untuk menciptakan momen tak terlupakan
+          <p className="text-lg md:text-xl text-amber-100 leading-relaxed max-w-3xl mx-auto">
+            Wujudkan acara impian Anda dengan <span className="font-bold text-amber-300">layanan profesional premium</span> yang dirancang khusus untuk menciptakan momen tak terlupakan
           </p>
         </div>
 
-        {/* Elegant service cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20 px-4">
+        {/* Premium service cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 mb-20 px-4">
           {services.map((service, index) => {
             const IconComponent = getServiceIcon(service.category);
             const gradientClass = getServiceGradient(service.category);
@@ -195,109 +196,80 @@ const ServicesSection = () => {
                 className="group relative h-full"
                 onMouseEnter={() => setActiveService(index)}
               >
-                {/* Card with elegant styling */}
-                <div className="relative bg-white/90 backdrop-blur-xl border border-stone-200 rounded-2xl p-6 md:p-8 h-full hover:bg-white hover:border-amber-300 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col">
-                  {/* Elegant gradient border effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl`}></div>
+                {/* Premium card with enhanced styling - dark theme */}
+                <div className="relative bg-white/5 backdrop-blur-xl border-2 border-amber-400/20 rounded-2xl p-6 h-full hover:border-amber-400/50 hover:shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                  {/* Premium gradient glow effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-2xl`}></div>
                   
-                  {/* Service icon with elegant styling */}
-                  <div className="relative mb-6">
-                    <div className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r ${gradientClass} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                      <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                  {/* Service icon with premium styling */}
+                  <div className="relative mb-5">
+                    <div className="relative">
+                      {/* Icon glow */}
+                      <div className={`absolute inset-0 bg-gradient-to-r ${gradientClass} rounded-xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity`}></div>
+                      {/* Icon container */}
+                      <div className={`relative w-16 h-16 bg-gradient-to-br ${gradientClass} rounded-xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl`}>
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </div>
                     </div>
-                    <div className="w-full h-[1px] bg-gradient-to-r from-stone-200 via-amber-300 to-transparent"></div>
+                    <div className="w-full h-[1px] bg-gradient-to-r from-amber-400/30 via-amber-400 to-transparent mt-4"></div>
                   </div>
                   
-                  {/* Service content */}
-                  <div className="flex-1 flex flex-col">
-                    <h3 className="text-xl md:text-2xl font-light text-stone-800 mb-3 tracking-wide group-hover:text-amber-700 transition-colors duration-300">
+                  {/* Service content with premium styling */}
+                  <div className="flex-1 flex flex-col relative z-10">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-amber-300 transition-colors duration-300">
                       {service.name}
                     </h3>
                     
-                    <p className="text-stone-600 mb-6 leading-relaxed font-light text-sm md:text-base flex-1">
+                    <p className="text-amber-100 mb-5 leading-relaxed font-medium text-sm md:text-base flex-1">
                       {service.description}
                     </p>
 
-                    {/* Elegant features list */}
-                    <div className="mb-6">
+                    {/* Premium features list */}
+                    <div className="mb-5 bg-white/5 rounded-xl p-4 border border-amber-400/20">
                       <div className="space-y-2">
-                        {service.features?.slice(0, 3).map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start">
-                            <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span className="text-stone-600 font-light text-xs md:text-sm leading-relaxed">{feature}</span>
+                        {service.features?.slice(0, 4).map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start group/item hover:translate-x-1 transition-transform duration-300">
+                            <div className="flex items-center justify-center w-5 h-5 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg mr-2 flex-shrink-0 group-hover/item:scale-110 transition-transform mt-0.5">
+                              <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                            </div>
+                            <span className="text-amber-100 font-medium text-xs md:text-sm leading-relaxed">{feature}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* Service details */}
-                    <div className="space-y-3 mb-6 pt-4 border-t border-stone-200">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center">
-                          <Clock className="w-3 h-3 md:w-4 md:h-4 text-amber-600 mr-2" />
-                          <span className="text-xs text-stone-500 font-light tracking-wider uppercase">Durasi</span>
+                    {/* Service details with premium design */}
+                    <div className="space-y-2 mb-4 pt-4 border-t border-amber-400/20">
+                      <div className="flex justify-between items-center bg-white/5 rounded-lg p-2.5">
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4 text-amber-400" />
+                          <span className="text-xs text-amber-200 font-semibold">Durasi</span>
                         </div>
-                        <span className="text-stone-700 font-light text-xs md:text-sm">{service.duration}</span>
+                        <span className="text-white font-bold text-xs">{service.duration}</span>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center">
-                          <MessageCircle className="w-3 h-3 md:w-4 md:h-4 text-amber-600 mr-2" />
-                          <span className="text-xs text-stone-500 font-light tracking-wider uppercase">Konsultasi</span>
+                      <div className="flex justify-between items-center bg-white/5 rounded-lg p-2.5">
+                        <div className="flex items-center gap-2">
+                          <MessageCircle className="w-4 h-4 text-green-400" />
+                          <span className="text-xs text-amber-200 font-semibold">Konsultasi</span>
                         </div>
-                        <span className="text-amber-600 font-light text-xs md:text-sm">Via WhatsApp</span>
+                        <span className="text-green-400 font-bold text-xs">Gratis WhatsApp</span>
                       </div>
                     </div>
 
                     {/* Elegant CTA button */}
-                    <button className={`group/btn w-full relative px-4 py-3 bg-gradient-to-r ${gradientClass} text-white font-light tracking-wide rounded-lg hover:shadow-lg transition-all duration-500 mt-auto`}>
-                      <div className="relative flex items-center justify-center">
-                        <span className="text-sm">Konsultasi Gratis</span>
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                    <Link to="/booking" className={`group/btn w-full relative px-5 py-3 bg-gradient-to-r ${gradientClass} bg-[length:200%_auto] text-white font-bold tracking-wide rounded-xl hover:shadow-2xl transition-all duration-500 mt-auto overflow-hidden`}>
+                      <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-orange-700 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
+                      <div className="relative flex items-center justify-center gap-2">
+                        <Sparkles className="w-4 h-4" />
+                        <span className="text-sm">Pesan Sekarang</span>
+                        <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                       </div>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Elegant CTA section */}
-        <div className="text-center pt-16 border-t border-stone-200">
-          <h3 className="text-3xl md:text-4xl font-light text-stone-800 mb-6 tracking-wide">
-            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-              Siap Mewujudkan
-            </span>
-            <br />
-            <span className="text-stone-700">Acara Impian Anda?</span>
-          </h3>
-          
-          <p className="text-stone-600 max-w-2xl mx-auto font-light leading-relaxed mb-8 text-lg">
-            Setiap momen berharga layak dirayakan dengan sempurna. Mari kita ciptakan pengalaman yang tak akan pernah terlupakan.
-          </p>
-          
-          <p className="text-stone-500 max-w-xl mx-auto font-light mb-12">
-            Konsultasi gratis untuk membahas visi, kebutuhan, dan mewujudkan acara sesuai impian Anda
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              to="/booking" 
-              className="px-12 py-5 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-light tracking-wide rounded-2xl hover:from-amber-700 hover:to-orange-700 transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 shadow-xl flex items-center justify-center"
-            >
-              <MessageCircle className="w-5 h-5 mr-3" />
-              <span>Mulai Konsultasi Gratis</span>
-              <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-            
-            <Link 
-              to="#gallery" 
-              className="px-12 py-5 border-2 border-stone-300 text-stone-700 font-light tracking-wide rounded-2xl hover:bg-stone-100 hover:border-stone-400 transition-all duration-300 flex items-center justify-center"
-            >
-              <Sparkles className="w-5 h-5 mr-3" />
-              <span>Lihat Portfolio</span>
-            </Link>
-          </div>
         </div>
       </div>
     </section>

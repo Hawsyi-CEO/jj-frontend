@@ -1,33 +1,51 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, Heart, Phone } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
+      
+      // Detect active section
+      const sections = ['services', 'gallery', 'testimonials', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navigation = [
-    { name: 'Beranda', href: '/', type: 'route' },
-    { name: 'Layanan', href: 'services', type: 'scroll' },
-    { name: 'Portfolio', href: 'gallery', type: 'scroll' },
-    { name: 'Testimoni', href: 'testimonials', type: 'scroll' },
-    { name: 'Kontak', href: 'contact', type: 'scroll' },
+    { name: 'Beranda', href: '/', type: 'route', section: 'home' },
+    { name: 'Layanan', href: 'services', type: 'scroll', section: 'services' },
+    { name: 'Portfolio', href: 'gallery', type: 'scroll', section: 'gallery' },
+    { name: 'Testimoni', href: 'testimonials', type: 'scroll', section: 'testimonials' },
   ];
 
   const handleNavigation = (item, e) => {
-    if (item.type === 'scroll') {
-      e.preventDefault();
-      
+    e.preventDefault();
+    
+    if (item.type === 'route') {
+      // Navigate to home and scroll to top
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (item.type === 'scroll') {
       // If not on home page, navigate to home first
       if (location.pathname !== '/') {
         navigate('/');
@@ -38,10 +56,10 @@ const Navigation = () => {
       } else {
         scrollToSection(item.href);
       }
-      
-      // Close mobile menu if open
-      setIsOpen(false);
     }
+    
+    // Close mobile menu if open
+    setIsOpen(false);
   };
 
   const scrollToSection = (sectionId) => {
@@ -57,71 +75,83 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
+    <nav className={`fixed w-full z-50 transition-all duration-700 ${
       scrolled 
-        ? 'bg-white/95 backdrop-blur-xl border-b border-stone-200 shadow-lg' 
-        : 'bg-white/90 backdrop-blur-sm'
+        ? 'bg-stone-900/95 backdrop-blur-xl shadow-2xl border-b border-amber-500/20' 
+        : 'bg-stone-900/80 backdrop-blur-md'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Elegant Logo */}
-          <Link to="/" className="flex items-center group">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          {/* Modern Minimal Logo */}
+          <button onClick={() => handleNavigation('home')} className="flex items-center gap-3 group relative">
+            {/* Animated underline */}
+            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 group-hover:w-full transition-all duration-500"></div>
+            
+            {/* Logo icon with subtle animation */}
             <div className="relative">
-              <div className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <span className="text-xl md:text-2xl font-light tracking-[0.2em]">JJ</span>
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg group-hover:shadow-amber-500/50 transition-all duration-500 ${scrolled ? 'scale-100' : 'scale-110'}`}>
+                <Heart className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" fill="currentColor" />
               </div>
+              {/* Subtle pulse effect */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500"></div>
             </div>
-            <div className="ml-3 md:ml-4 hidden sm:block">
-              <div className="text-xs font-light text-stone-700 tracking-[0.15em] uppercase flex items-center">
-                <Sparkles className="w-3 h-3 mr-1 text-amber-600" />
-                Master of Ceremony
-              </div>
-              <div className="text-xs font-light text-stone-500 tracking-[0.15em] uppercase">
-                & Wedding Organizer
-              </div>
+            
+            {/* Logo text */}
+            <div>
+              <div className={`text-xl font-bold tracking-tight transition-colors duration-300 ${scrolled ? 'text-white' : 'text-white'}`}>JJ Events</div>
+              <div className={`text-xs font-medium transition-colors duration-300 ${scrolled ? 'text-amber-300' : 'text-amber-200'}`}>MC & Wedding Organizer</div>
             </div>
-          </Link>
+          </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-            {navigation.map((item) => (
-              item.type === 'route' ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="relative text-stone-600 hover:text-stone-800 text-sm font-light tracking-wide transition-all duration-300 group py-2 px-2"
-                >
-                  {item.name}
-                  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-amber-500 to-orange-500 group-hover:w-full transition-all duration-300"></div>
-                  <div className="absolute inset-0 bg-stone-100/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-                </Link>
-              ) : (
+          {/* Modern Clean Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-2">
+            {navigation.map((item) => {
+              const isActive = item.section === 'home' 
+                ? location.pathname === '/' && !activeSection 
+                : activeSection === item.section;
+              
+              return (
                 <button
                   key={item.name}
                   onClick={(e) => handleNavigation(item, e)}
-                  className="relative text-stone-600 hover:text-stone-800 text-sm font-light tracking-wide transition-all duration-300 group py-2 px-2"
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group ${
+                    isActive 
+                      ? 'text-amber-400 bg-white/10' 
+                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                  }`}
                 >
-                  {item.name}
-                  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-amber-500 to-orange-500 group-hover:w-full transition-all duration-300"></div>
-                  <div className="absolute inset-0 bg-stone-100/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                  <span className="relative z-10">{item.name}</span>
+                  {isActive && (
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-400 rounded-full"></div>
+                  )}
                 </button>
-              )
-            ))}
+              );
+            })}
             
-            {/* Elegant CTA Button */}
-            <Link
-              to="/booking"
-              className="px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white text-sm font-light tracking-wide rounded-lg hover:from-amber-700 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+            {/* Divider */}
+            <div className="w-px h-6 bg-white/20 mx-2"></div>
+            
+            {/* WhatsApp CTA Button dengan animasi smooth */}
+            <a
+              href="https://wa.me/6289516438703"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white text-sm font-semibold rounded-lg overflow-hidden group hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300"
             >
-              Konsultasi Gratis
-            </Link>
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <span className="relative z-10 flex items-center gap-2">
+                <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                Pesan via WhatsApp
+              </span>
+            </a>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button - Dark theme */}
+          <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-stone-600 hover:text-stone-800 transition-colors duration-200"
+              className="p-3 text-white hover:text-amber-400 hover:bg-white/10 rounded-xl transition-all duration-300"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -129,37 +159,52 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Dark theme */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-stone-200">
-          <div className="px-4 pt-6 pb-8 space-y-6">
-            {navigation.map((item) => (
-              item.type === 'route' ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="block text-stone-600 hover:text-stone-800 text-base font-light tracking-wide transition-colors duration-300 py-2"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ) : (
+        <div className="lg:hidden bg-stone-900/95 backdrop-blur-xl border-t border-amber-500/20 shadow-2xl animate-fadeIn">
+          <div className="px-6 py-6 space-y-1">
+            {navigation.map((item) => {
+              const isActive = item.section === 'home' 
+                ? location.pathname === '/' && !activeSection 
+                : activeSection === item.section;
+              
+              return (
                 <button
                   key={item.name}
-                  onClick={(e) => handleNavigation(item, e)}
-                  className="block w-full text-left text-stone-600 hover:text-stone-800 text-base font-light tracking-wide transition-colors duration-300 py-2"
+                  onClick={(e) => {
+                    handleNavigation(item, e);
+                    setIsOpen(false);
+                  }}
+                  className={`block w-full text-left py-3 px-4 rounded-lg font-medium transition-all duration-300 ${
+                    isActive 
+                      ? 'text-amber-400 bg-white/10' 
+                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                  }`}
                 >
                   {item.name}
                 </button>
-              )
-            ))}
-            <div className="pt-4">
-              <Link
-                to="/booking"
-                className="block w-full text-center px-8 py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-light tracking-wide rounded-xl hover:from-amber-700 hover:to-orange-700 transition-all duration-300"
+              );
+            })}
+            
+            <div className="pt-4 space-y-2">
+              <a
+                href="https://wa.me/6289516438703"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300"
                 onClick={() => setIsOpen(false)}
               >
-                Konsultasi Gratis
+                <Phone className="w-4 h-4" />
+                <span>Pesan via WhatsApp</span>
+              </a>
+
+              <Link
+                to="/admin/login"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white/10 border border-amber-500/30 text-amber-400 font-semibold rounded-lg hover:bg-amber-600/20 hover:border-amber-500 transition-all duration-300"
+                onClick={() => setIsOpen(false)}
+              >
+                <Lock className="w-4 h-4" />
+                <span>Login Admin</span>
               </Link>
             </div>
           </div>
