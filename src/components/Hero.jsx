@@ -34,7 +34,7 @@ const Hero = () => {
               className="btn-primary inline-flex items-center justify-center group"
             >
               <Calendar className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform" />
-              Konsultasi Gratis
+              Konsultasi via WhatsApp
             </Link>
             <Link
               to="#services"

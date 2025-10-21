@@ -12,9 +12,9 @@ const BookingPage = () => {
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
 
   const services = [
-    { id: 'mc', name: 'Master of Ceremony', price: '2,000,000 - 5,000,000' },
-    { id: 'wedding_organizer', name: 'Wedding Organizer', price: '15,000,000 - 50,000,000' },
-    { id: 'both', name: 'Paket MC + Wedding Organizer', price: 'Harga Khusus' }
+    { id: 'mc', name: 'Master of Ceremony', description: 'Konsultasi via WhatsApp untuk detail harga' },
+    { id: 'wedding_organizer', name: 'Wedding Organizer', description: 'Konsultasi via WhatsApp untuk detail harga' },
+    { id: 'both', name: 'Paket MC + Wedding Organizer', description: 'Konsultasi via WhatsApp untuk detail harga' }
   ];
 
   const onSubmit = async (data) => {
@@ -61,23 +61,23 @@ const BookingPage = () => {
 
   if (submitStatus === 'success') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full bg-white rounded-xl shadow-xl p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <div className="min-h-screen bg-white flex items-center justify-center px-4">
+        <div className="max-w-lg w-full bg-white border border-primary-100 rounded p-12 text-center">
+          <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-8">
+            <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Booking Submitted!</h2>
-          <p className="text-gray-600 mb-6">
-            Thank you for your booking request. We'll contact you within 24 hours via WhatsApp to confirm your details.
+          <h2 className="text-xl font-light text-primary-900 mb-6 tracking-wide">Booking Submitted</h2>
+          <p className="text-primary-600 mb-8 font-light leading-relaxed">
+            Terima kasih atas permintaan booking Anda. Tim kami akan menghubungi Anda dalam 24 jam via WhatsApp untuk konfirmasi detail.
           </p>
           <button
             onClick={() => {
               setSubmitStatus(null);
               setStep(1);
             }}
-            className="btn-primary w-full"
+            className="px-8 py-3 bg-primary-900 text-white rounded font-light tracking-wide hover:bg-primary-800 transition-colors"
           >
             Book Another Event
           </button>
@@ -137,7 +137,7 @@ const BookingPage = () => {
                     />
                     <div className="flex-1">
                       <div className="font-light text-primary-900">{service.name}</div>
-                      <div className="text-sm text-primary-500 font-light">IDR {service.price}</div>
+                      <div className="text-sm text-primary-500 font-light">{service.description}</div>
                     </div>
                   </label>
                 ))}
@@ -309,36 +309,36 @@ const BookingPage = () => {
                 />
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h4 className="font-semibold text-primary-800 mb-4">What happens next?</h4>
-                <ul className="space-y-2 text-sm text-gray-600">
+              <div className="bg-primary-50 rounded p-8">
+                <h4 className="font-light text-primary-900 mb-6 tracking-wide">What happens next?</h4>
+                <ul className="space-y-4 text-sm text-primary-600 font-light">
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-gold-500 rounded-full mr-3"></div>
+                    <div className="w-1 h-1 bg-primary-400 rounded-full mr-4"></div>
                     We'll receive your booking request immediately
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-gold-500 rounded-full mr-3"></div>
+                    <div className="w-1 h-1 bg-primary-400 rounded-full mr-4"></div>
                     Our team will contact you via WhatsApp within 24 hours
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-gold-500 rounded-full mr-3"></div>
+                    <div className="w-1 h-1 bg-primary-400 rounded-full mr-4"></div>
                     We'll discuss your requirements and provide a detailed quote
                   </li>
                   <li className="flex items-center">
-                    <div className="w-2 h-2 bg-gold-500 rounded-full mr-3"></div>
+                    <div className="w-1 h-1 bg-primary-400 rounded-full mr-4"></div>
                     Once confirmed, we'll begin planning your perfect event
                   </li>
                 </ul>
               </div>
 
-              <div className="flex justify-between">
-                <button type="button" onClick={prevStep} className="btn-secondary">
+              <div className="flex justify-between pt-6">
+                <button type="button" onClick={prevStep} className="px-8 py-3 border border-primary-200 text-primary-600 rounded font-light tracking-wide hover:bg-primary-50 transition-colors">
                   Previous
                 </button>
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="btn-primary px-8 disabled:opacity-50"
+                  className="px-8 py-3 bg-primary-900 text-white rounded font-light tracking-wide hover:bg-primary-800 transition-colors disabled:opacity-50"
                 >
                   {loading ? 'Submitting...' : 'Submit Booking Request'}
                 </button>

@@ -21,9 +21,8 @@ const ServicesSection = () => {
           {
             id: 1,
             name: 'Master of Ceremony',
-            description: 'Professional MC services for weddings, engagements, and formal events',
-            price_range: '2,000,000 - 5,000,000',
-            duration: '4-6 hours',
+            description: 'Pemandu acara profesional untuk pernikahan, pertunangan, dan acara formal',
+            duration: '4-6 jam',
             category: 'mc',
             features: [
               'Professional hosting',
@@ -36,9 +35,8 @@ const ServicesSection = () => {
           {
             id: 2,
             name: 'Wedding Organizer',
-            description: 'Complete wedding planning and coordination services',
-            price_range: '15,000,000 - 50,000,000',
-            duration: '3-6 months planning',
+            description: 'Layanan lengkap perencanaan dan koordinasi pernikahan',
+            duration: '3-6 bulan perencanaan',
             category: 'wedding_organizer',
             features: [
               'Full wedding planning',
@@ -138,8 +136,8 @@ const ServicesSection = () => {
                       <span className="text-sm text-primary-700 font-light">{service.duration}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-xs text-primary-500 font-light tracking-wider uppercase">Investasi</span>
-                      <span className="text-sm text-primary-700 font-light">IDR {service.price_range}</span>
+                      <span className="text-xs text-primary-500 font-light tracking-wider uppercase">Konsultasi</span>
+                      <span className="text-sm text-primary-700 font-light">Via WhatsApp</span>
                     </div>
                   </div>
 
@@ -153,13 +151,17 @@ const ServicesSection = () => {
         </div>
 
         <div className="text-center mt-20 pt-16 border-t border-primary-200">
-          <p className="text-primary-600 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-primary-600 max-w-2xl mx-auto font-light leading-relaxed mb-6">
             Setiap acara adalah unik. Kami menawarkan paket yang disesuaikan dengan kebutuhan, 
             anggaran, dan visi Anda.
           </p>
+          <p className="text-primary-500 max-w-xl mx-auto font-light text-sm mb-8">
+            Semua detail harga dan paket akan didiskusikan langsung melalui WhatsApp 
+            untuk mendapatkan penawaran terbaik sesuai budget Anda.
+          </p>
           <div className="mt-6">
             <Link to="/booking" className="inline-flex items-center text-primary-900 font-light hover:text-primary-600 transition-colors">
-              Konsultasi Gratis
+              Konsultasi Gratis via WhatsApp
               <div className="w-6 h-[1px] bg-primary-400 ml-3"></div>
             </Link>
           </div>
