@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Phone } from 'lucide-react';
+import { Menu, X, Heart, Phone, Lock } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,6 +131,17 @@ const Navigation = () => {
             {/* Divider */}
             <div className="w-px h-6 bg-white/20 mx-2"></div>
             
+            {/* Admin Login Button */}
+            <button
+              onClick={() => navigate('/admin/login')}
+              className="relative px-4 py-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium rounded-lg overflow-hidden group hover:bg-amber-500/20 hover:border-amber-500/50 transition-all duration-300"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                Admin
+              </span>
+            </button>
+            
             {/* WhatsApp CTA Button dengan animasi smooth */}
             <a
               href="https://wa.me/6289516438703"
@@ -187,6 +198,19 @@ const Navigation = () => {
             })}
             
             <div className="pt-4 space-y-2">
+              {/* Admin Login Button - Mobile */}
+              <button
+                onClick={() => {
+                  navigate('/admin/login');
+                  setIsOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-semibold rounded-lg hover:bg-amber-500/20 hover:border-amber-500/50 transition-all duration-300"
+              >
+                <Lock className="w-4 h-4" />
+                <span>Login Admin</span>
+              </button>
+              
+              {/* WhatsApp Button - Mobile */}
               <a
                 href="https://wa.me/6289516438703"
                 target="_blank"
@@ -197,15 +221,6 @@ const Navigation = () => {
                 <Phone className="w-4 h-4" />
                 <span>Pesan via WhatsApp</span>
               </a>
-
-              <Link
-                to="/admin/login"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white/10 border border-amber-500/30 text-amber-400 font-semibold rounded-lg hover:bg-amber-600/20 hover:border-amber-500 transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                <Lock className="w-4 h-4" />
-                <span>Login Admin</span>
-              </Link>
             </div>
           </div>
         </div>
