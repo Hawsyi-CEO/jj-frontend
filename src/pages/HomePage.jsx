@@ -1,102 +1,71 @@
 import Hero from '../components/Hero';
 import ServicesSection from '../components/ServicesSection';
+import Gallery from '../components/Gallery';
+import { Star } from 'lucide-react';
 
 const HomePage = () => {
   return (
     <div>
       <Hero />
       <ServicesSection />
-      
-      {/* Portfolio Preview Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Gallery />
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24 bg-gradient-to-br from-stone-50 via-amber-50 to-orange-50 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-200/25 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="section-title">Recent Events</h2>
-            <p className="subtitle">
-              A glimpse of the magical moments we've helped create
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 backdrop-blur-sm border border-stone-200 mb-8 shadow-lg">
+              <Star className="w-4 h-4 text-amber-600 mr-2" />
+              <span className="text-stone-700 text-sm font-light tracking-wide">Testimoni Klien</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-light text-stone-800 mb-8 tracking-wide">
+              <span className="text-stone-800">Kata Mereka</span>
+              <br />
+              <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 bg-clip-text text-transparent">Tentang Kami</span>
+            </h2>
+            <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mb-8"></div>
+            <p className="text-stone-600 font-light leading-relaxed max-w-2xl mx-auto text-lg">
+              Kepercayaan dan kepuasan klien adalah prioritas utama kami
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Elegant Wedding Reception",
-                image: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                category: "Wedding Organizer"
-              },
-              {
-                title: "Corporate Gala Event",
-                image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                category: "MC Services"
-              },
-              {
-                title: "Traditional Engagement",
-                image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                category: "MC Services"
-              }
-            ].map((event, index) => (
-              <div key={index} className="card overflow-hidden group">
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={event.image} 
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-sm font-medium text-gold-300">{event.category}</div>
-                    <h3 className="text-lg font-bold">{event.title}</h3>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-50 to-gold-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title">What Our Clients Say</h2>
-            <p className="subtitle">
-              Don't just take our word for it - hear from our happy clients
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
                 name: "Sarah & David",
                 event: "Wedding Reception",
-                text: "JJ made our wedding day absolutely perfect! The coordination was flawless and the MC services were outstanding. Highly recommended!",
+                text: "JJ membuat hari pernikahan kami benar-benar sempurna! Koordinasinya sangat baik dan layanan MC-nya luar biasa.",
                 rating: 5
               },
               {
                 name: "PT. Mandiri Corp",
                 event: "Annual Gala",
-                text: "Professional, punctual, and engaging. JJ's MC services elevated our corporate event beyond expectations.",
+                text: "Profesional, tepat waktu, dan engaging. Layanan MC JJ meningkatkan acara korporat kami melampaui ekspektasi.",
                 rating: 5
               },
               {
                 name: "Rina & Ahmad",
                 event: "Engagement Party",
-                text: "From planning to execution, everything was handled beautifully. Our guests couldn't stop complimenting the event!",
+                text: "Dari perencanaan hingga eksekusi, semuanya ditangani dengan indah. Tamu kami tidak berhenti memuji acara tersebut!",
                 rating: 5
               }
             ].map((testimonial, index) => (
-              <div key={index} className="card p-6">
-                <div className="flex text-gold-500 mb-4">
+              <div key={index} className="bg-white/90 backdrop-blur-sm border border-stone-200 rounded-2xl p-8 hover:shadow-xl hover:bg-white transition-all duration-500 hover:-translate-y-2">
+                <div className="flex text-amber-500 mb-6 justify-center">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    <Star key={i} className="w-5 h-5" fill="currentColor" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4 italic">"{testimonial.text}"</p>
-                <div>
-                  <div className="font-semibold text-primary-800">{testimonial.name}</div>
-                  <div className="text-sm text-primary-600">{testimonial.event}</div>
+                <p className="text-stone-600 mb-6 italic font-light leading-relaxed text-center">"{testimonial.text}"</p>
+                <div className="border-t border-stone-200 pt-4 text-center">
+                  <div className="font-light text-stone-800 text-lg">{testimonial.name}</div>
+                  <div className="text-sm text-amber-600 font-light">{testimonial.event}</div>
                 </div>
               </div>
             ))}
@@ -105,21 +74,31 @@ const HomePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-elegant">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-            Ready to Create Your Perfect Event?
-          </h2>
-          <p className="text-xl text-gray-200 mb-8">
-            Let's discuss your vision and bring it to life with our professional services.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/booking" className="btn-primary bg-gold-500 hover:bg-gold-600">
-              Book Consultation
-            </a>
-            <a href="https://wa.me/6281234567890" className="btn-secondary bg-white/10 border-white text-white hover:bg-white hover:text-primary-800">
-              WhatsApp Us
-            </a>
+      <section className="py-20 bg-gradient-to-br from-amber-100 via-orange-100 to-stone-100 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-20 w-64 h-64 bg-amber-300/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-20 w-80 h-80 bg-orange-300/15 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-12 border border-stone-200 shadow-xl">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-stone-800 mb-4 md:mb-6 tracking-wide">
+              <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Siap Mewujudkan</span>
+              <br />
+              <span className="text-stone-700">Acara Sempurna Anda?</span>
+            </h2>
+            <p className="text-lg md:text-xl text-stone-600 mb-8 md:mb-10 font-light leading-relaxed max-w-2xl mx-auto">
+              Mari diskusikan visi Anda dan wujudkan dengan layanan profesional kami yang berpengalaman lebih dari 8 tahun.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+              <a href="/booking" className="px-8 md:px-12 py-3 md:py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-light tracking-wide rounded-xl hover:from-amber-700 hover:to-orange-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-sm md:text-base">
+                Konsultasi Gratis
+              </a>
+              <a href="https://wa.me/6289516438703" className="px-8 md:px-12 py-3 md:py-4 border-2 border-stone-300 text-stone-700 font-light tracking-wide rounded-xl hover:bg-stone-100 hover:border-stone-400 transition-all duration-300 text-sm md:text-base">
+                WhatsApp Kami
+              </a>
+            </div>
           </div>
         </div>
       </section>
