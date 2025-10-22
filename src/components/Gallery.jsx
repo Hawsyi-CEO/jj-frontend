@@ -1,37 +1,19 @@
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight, Play, Eye, Sparkles, Heart } from 'lucide-react';
 
-// Import foto-foto
-import foto1 from '../assets/foto/jeje mc 1.JPG';
-import foto2 from '../assets/foto/jeje mc 2.JPG';
-import foto3 from '../assets/foto/jeje mc 3.JPG';
-import foto4 from '../assets/foto/jeje mc 4.JPG';
-import foto5 from '../assets/foto/jeje mc 5.JPG';
-import foto6 from '../assets/foto/jeje mc 6.JPG';
-import foto7 from '../assets/foto/jeje mc 7.JPG';
-import foto8 from '../assets/foto/jeje mc 8.JPG';
-import foto9 from '../assets/foto/jeje mc 9.JPG';
-import foto10 from '../assets/foto/jeje mc 10.JPG';
-import foto11 from '../assets/foto/jejej mc 11.JPG';
-import foto12 from '../assets/foto/jeje mc 12.JPG';
-import fotoAdat from '../assets/foto/jeje mc adat.JPG';
-import fotoMelayu from '../assets/foto/melayu.JPG';
-import foto27 from '../assets/foto/foto 27.JPG';
-import foto28 from '../assets/foto/foto 28.JPG';
-
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const photos = [
-    { src: foto1, alt: 'JJ MC Professional 1', category: 'mc' },
-    { src: foto2, alt: 'JJ MC Professional 2', category: 'mc' },
-    { src: foto3, alt: 'JJ MC Professional 3', category: 'mc' },
-    { src: foto4, alt: 'JJ MC Professional 4', category: 'mc' },
-    { src: fotoAdat, alt: 'JJ MC Adat Wedding', category: 'wedding' },
-    { src: fotoMelayu, alt: 'JJ MC Melayu Wedding', category: 'wedding' },
-    { src: foto27, alt: 'Wedding Event 27', category: 'wedding' },
-    { src: foto28, alt: 'Wedding Event 28', category: 'wedding' },
+    { src: '/assets/jeje mc 1.JPG', alt: 'JJ MC Professional 1', category: 'mc' },
+    { src: '/assets/jeje mc 2.JPG', alt: 'JJ MC Professional 2', category: 'mc' },
+    { src: '/assets/jeje mc 3.JPG', alt: 'JJ MC Professional 3', category: 'mc' },
+    { src: '/assets/jeje mc 4.JPG', alt: 'JJ MC Professional 4', category: 'mc' },
+    { src: '/assets/jeje mc adat.JPG', alt: 'JJ MC Adat Wedding', category: 'wedding' },
+    { src: '/assets/melayu.JPG', alt: 'JJ MC Melayu Wedding', category: 'wedding' },
+    { src: '/assets/foto 27.JPG', alt: 'Wedding Event 27', category: 'wedding' },
+    { src: '/assets/foto 28.JPG', alt: 'Wedding Event 28', category: 'wedding' },
   ];
 
   const openModal = (photo, index) => {

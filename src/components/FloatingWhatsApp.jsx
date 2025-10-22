@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
+import { openWhatsAppSimple } from '../utils/whatsapp';
 
 const FloatingWhatsApp = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,23 +15,10 @@ const FloatingWhatsApp = () => {
   }, []);
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = '6289516438703';
-    const message = 'Halo! Saya tertarik dengan layanan JJ MC & Wedding Organizer. Bisakah kita diskusi lebih lanjut?';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    
-    // Try different methods to open WhatsApp
-    try {
-      // Method 1: window.open
-      const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      // Method 2: If popup blocked, try window.location
-      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-        window.location.href = whatsappUrl;
-      }
-    } catch (error) {
-      console.error('Error opening WhatsApp:', error);
-      // Fallback: direct navigation
-      window.location.href = whatsappUrl;
+    const success = openWhatsAppSimple();
+    if (!success) {
+      // Show user-friendly message if all methods fail
+      alert('Tidak dapat membuka WhatsApp otomatis. Silakan hubungi +62 895-1643-8703 secara manual.');
     }
   };
 

@@ -128,8 +128,12 @@ const HomePage = () => {
             {/* Brand Section */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Heart className="w-6 h-6 text-white" fill="currentColor" />
+                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                  <img 
+                    src="/assets/logo-jj.png" 
+                    alt="JJ Events Logo" 
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-orange-600 bg-clip-text text-transparent">

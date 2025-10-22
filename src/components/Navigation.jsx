@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Lock } from 'lucide-react';
+import { Menu, X, Lock } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -110,13 +110,17 @@ const Navigation = () => {
             {/* Animated underline */}
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 group-hover:w-full transition-all duration-500"></div>
             
-            {/* Logo icon with subtle animation */}
+            {/* Logo image with subtle animation */}
             <div className="relative">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg group-hover:shadow-amber-500/50 transition-all duration-500 ${scrolled ? 'scale-100' : 'scale-110'}`}>
-                <Heart className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" fill="currentColor" />
+              <div className={`w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:shadow-amber-500/50 transition-all duration-500 overflow-hidden ${scrolled ? 'scale-100' : 'scale-110'}`}>
+                <img 
+                  src="/assets/logo-jj.png" 
+                  alt="JJ Events Logo" 
+                  className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
               {/* Subtle pulse effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
             </div>
             
             {/* Logo text */}

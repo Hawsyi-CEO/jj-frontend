@@ -17,7 +17,7 @@ const Hero = ({ previewData }) => {
     titleHighlight: 'Impian',
     subtitle: 'Bersama Partner Terpercaya Anda',
     description: 'Dengan pengalaman lebih dari 8 tahun, kami telah membantu ratusan pasangan mewujudkan pernikahan impian mereka. Dari MC profesional hingga wedding organizer lengkap, kami siap membuat momen spesial Anda menjadi kenangan yang tak terlupakan.',
-    imageUrl: '/src/assets/foto/jeje mc 1.JPG',
+    imageUrl: '/assets/jeje mc 1.JPG',
     stats: [
       { number: '500+', label: 'Acara Sukses' },
       { number: '8+', label: 'Tahun Pengalaman' },
@@ -93,17 +93,19 @@ const Hero = ({ previewData }) => {
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
               <button
                 onClick={() => {
-                  const message = 'Halo JJ Events! Saya tertarik dengan layanan MC dan Wedding Organizer. Bisa konsultasi gratis untuk acara saya?';
-                  const whatsappUrl = `https://wa.me/6289516438703?text=${encodeURIComponent(message)}`;
+                  const phoneNumber = '6289516438703';
                   
+                  // Try WhatsApp app intent first
                   try {
-                    const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-                    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-                      window.location.href = whatsappUrl;
-                    }
+                    window.location.href = `whatsapp://send?phone=${phoneNumber}`;
                   } catch (error) {
-                    console.error('Error opening WhatsApp:', error);
-                    window.location.href = whatsappUrl;
+                    // Fallback to API endpoint
+                    try {
+                      window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}`, '_blank');
+                    } catch (fallbackError) {
+                      // Final fallback to phone
+                      window.location.href = `tel:+${phoneNumber}`;
+                    }
                   }
                 }}
                 className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-600 bg-[length:200%_auto] text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-amber-500/50 transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 inline-flex items-center justify-center overflow-hidden cursor-pointer"
