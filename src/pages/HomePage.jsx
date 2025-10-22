@@ -115,7 +115,7 @@ const HomePage = () => {
       </section>
 
       {/* Premium Footer Section */}
-      <footer className="bg-stone-900 border-t border-amber-500/20 relative overflow-hidden">
+      <footer id="contact" className="bg-stone-900 border-t border-amber-500/20 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(251,191,36,0.1),transparent_70%)]"></div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Phone, Lock } from 'lucide-react';
+import { Menu, X, Heart, Lock } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,19 +15,29 @@ const Navigation = () => {
       
       // Detect active section
       const sections = ['services', 'gallery', 'testimonials', 'contact'];
+      let foundSection = '';
+      
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            foundSection = section;
             break;
           }
         }
       }
+      
+      // If we're at the top of the page, clear active section
+      if (window.scrollY < 100) {
+        foundSection = '';
+      }
+      
+      setActiveSection(foundSection);
     };
     
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Call once on mount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -36,15 +46,24 @@ const Navigation = () => {
     { name: 'Layanan', href: 'services', type: 'scroll', section: 'services' },
     { name: 'Portfolio', href: 'gallery', type: 'scroll', section: 'gallery' },
     { name: 'Testimoni', href: 'testimonials', type: 'scroll', section: 'testimonials' },
+    { name: 'Kontak', href: 'contact', type: 'scroll', section: 'contact' },
   ];
 
   const handleNavigation = (item, e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     
     if (item.type === 'route') {
       // Navigate to home and scroll to top
-      navigate('/');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setActiveSection('');
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveSection('');
+      }
     } else if (item.type === 'scroll') {
       // If not on home page, navigate to home first
       if (location.pathname !== '/') {
@@ -52,7 +71,7 @@ const Navigation = () => {
         // Wait for navigation to complete, then scroll
         setTimeout(() => {
           scrollToSection(item.href);
-        }, 100);
+        }, 300);
       } else {
         scrollToSection(item.href);
       }
@@ -71,6 +90,7 @@ const Navigation = () => {
         top: elementPosition,
         behavior: 'smooth'
       });
+      setActiveSection(sectionId);
     }
   };
 
@@ -83,7 +103,10 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Modern Minimal Logo */}
-          <button onClick={() => handleNavigation('home')} className="flex items-center gap-3 group relative">
+          <button 
+            onClick={(e) => handleNavigation({ type: 'route', section: 'home' }, e)} 
+            className="flex items-center gap-3 group relative hover:scale-105 transition-transform duration-300"
+          >
             {/* Animated underline */}
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 group-hover:w-full transition-all duration-500"></div>
             
@@ -114,16 +137,22 @@ const Navigation = () => {
                 <button
                   key={item.name}
                   onClick={(e) => handleNavigation(item, e)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group cursor-pointer select-none ${
                     isActive 
-                      ? 'text-amber-400 bg-white/10' 
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                      ? 'text-amber-400 bg-white/10 shadow-lg' 
+                      : 'text-white/80 hover:text-amber-300 hover:bg-white/10 hover:scale-105 hover:shadow-md'
                   }`}
+                  style={{ 
+                    WebkitTapHighlightColor: 'transparent',
+                    userSelect: 'none'
+                  }}
                 >
                   <span className="relative z-10">{item.name}</span>
                   {isActive && (
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-400 rounded-full"></div>
                   )}
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100"></div>
                 </button>
               );
             })}
@@ -141,21 +170,6 @@ const Navigation = () => {
                 Admin
               </span>
             </button>
-            
-            {/* WhatsApp CTA Button dengan animasi smooth */}
-            <a
-              href="https://wa.me/6289516438703"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative px-6 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white text-sm font-semibold rounded-lg overflow-hidden group hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300"
-            >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-              <span className="relative z-10 flex items-center gap-2">
-                <Phone className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-                Pesan via WhatsApp
-              </span>
-            </a>
           </div>
 
           {/* Mobile menu button - Dark theme */}
@@ -186,10 +200,10 @@ const Navigation = () => {
                     handleNavigation(item, e);
                     setIsOpen(false);
                   }}
-                  className={`block w-full text-left py-3 px-4 rounded-lg font-medium transition-all duration-300 ${
+                  className={`block w-full text-left py-3 px-4 rounded-lg font-medium transition-all duration-300 cursor-pointer ${
                     isActive 
                       ? 'text-amber-400 bg-white/10' 
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                      : 'text-white/80 hover:text-white hover:bg-white/10 hover:scale-[1.02]'
                   }`}
                 >
                   {item.name}
@@ -209,18 +223,6 @@ const Navigation = () => {
                 <Lock className="w-4 h-4" />
                 <span>Login Admin</span>
               </button>
-              
-              {/* WhatsApp Button - Mobile */}
-              <a
-                href="https://wa.me/6289516438703"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                <Phone className="w-4 h-4" />
-                <span>Pesan via WhatsApp</span>
-              </a>
             </div>
           </div>
         </div>

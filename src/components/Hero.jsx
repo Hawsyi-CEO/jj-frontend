@@ -91,22 +91,45 @@ const Hero = ({ previewData }) => {
 
             {/* Premium CTA buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
-              <Link
-                to="/booking"
-                className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-600 bg-[length:200%_auto] text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-amber-500/50 transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 inline-flex items-center justify-center overflow-hidden"
+              <button
+                onClick={() => {
+                  const message = 'Halo JJ Events! Saya tertarik dengan layanan MC dan Wedding Organizer. Bisa konsultasi gratis untuk acara saya?';
+                  const whatsappUrl = `https://wa.me/6289516438703?text=${encodeURIComponent(message)}`;
+                  
+                  try {
+                    const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                      window.location.href = whatsappUrl;
+                    }
+                  } catch (error) {
+                    console.error('Error opening WhatsApp:', error);
+                    window.location.href = whatsappUrl;
+                  }
+                }}
+                className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-600 bg-[length:200%_auto] text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-amber-500/50 transform hover:scale-105 hover:-translate-y-1 transition-all duration-500 inline-flex items-center justify-center overflow-hidden cursor-pointer"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-700 to-orange-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <Calendar className="w-5 h-5 mr-3 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="relative z-10">Konsultasi Gratis Sekarang</span>
                 <div className="absolute inset-0 -z-10 bg-gradient-to-r from-amber-400 to-orange-400 blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
-              </Link>
-              <a
-                href="#services"
+              </button>
+              <button
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    const navHeight = 80;
+                    const elementPosition = servicesSection.offsetTop - navHeight;
+                    window.scrollTo({
+                      top: elementPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className="group relative px-8 py-4 bg-white/90 backdrop-blur-sm border-2 border-amber-600 text-amber-700 font-semibold rounded-xl hover:bg-amber-50 hover:border-amber-700 hover:shadow-xl transition-all duration-500 inline-flex items-center justify-center"
               >
                 <Users className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 <span>Lihat Paket Layanan</span>
-              </a>
+              </button>
             </div>
 
             {/* Premium trust badges */}

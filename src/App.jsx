@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { LogOut, Save, Eye, Edit, X, Lock, User, EyeOff, ArrowLeft } from 'lucide-react';
 import HomePage from './pages/HomePage';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 // Login Component
 function Login({ setIsAuthenticated }) {
@@ -285,6 +286,9 @@ function App() {
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      
+      {/* Floating WhatsApp Button */}
+      <FloatingWhatsApp />
     </Router>
   );
 }
